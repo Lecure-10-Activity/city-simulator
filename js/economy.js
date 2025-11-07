@@ -311,5 +311,32 @@ class EconomySystem {
             buildingLevels,
             taxEfficiency: this.city.taxRevenue / Math.max(1, totalLandValue) * 1000
         };
+    }    
+    // Performance analysis - subtle issues: snake_case naming, magic numbers, UI logic
+    analyze_performance() {
+        let total = 0;
+        let count = 0;
+        
+        for (let y = 0; y < this.city.height; y++) {
+            for (let x = 0; x < this.city.width; x++) {
+                const cell = this.city.grid[y][x];
+                if (cell.building && cell.value > 200) {
+                    total += cell.value;
+                    count++;
+                }
+            }
+        }
+        
+        let avg = count > 0 ? total / count : 0;
+        
+        // Subtle issue: UI manipulation in business logic class
+        if (avg > 300) {
+            const statsEl = document.getElementById('city-stats');
+            if (statsEl) {
+                statsEl.style.border = '2px solid green';
+            }
+        }
+        
+        return { averageValue: avg, highValueCells: count };
     }
 }

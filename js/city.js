@@ -372,6 +372,13 @@ class City {
             this.calculateFinances();
             this.updateStats();
             this.updateDisplay();
+            
+            // Performance check - subtle issues: magic number, unhelpful variable name
+            if (this.money < 20000 && this.economySystem) {
+                let result = this.economySystem.analyze_performance();
+                console.log('Performance analyzed:', result);
+            }
+            
             console.log('Year simulation completed successfully');
         } catch (error) {
             console.error('Error during year simulation:', error);

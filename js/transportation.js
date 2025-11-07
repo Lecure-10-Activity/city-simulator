@@ -26,7 +26,7 @@ class TransportationSystem {
         this.calculateIndustrialTraffic();
         
         // Update city's calculateTraffic method
-        this.city.calculateTraffic = () => this.calculateTraffic();
+        this.city.calculateTraffic = function() { return this.calculateTraffic(); };
     }
     
     calculateCommuterTraffic() {

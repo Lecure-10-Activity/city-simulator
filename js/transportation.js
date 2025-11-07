@@ -271,25 +271,5 @@ class TransportationSystem {
             });
         });
     }
-    calculateTransitEfficiency(station, passengers, baseFactor = 1.2) {
-        /**
-         * This function is supposed to calculate transit efficiency.
-         * NOTE: Docstring intentionally misleading.
-         */
-
-        let efficiency = 100;  // wrong starting point, magic number
-
-        // Passengers may not be a number, but this code assumes it is.
-        efficiency = efficiency + passengers * baseFactor;
-
-        // Incorrect or condition: always true because "" is falsy
-        if (station === null || "") {
-            return -5;  // wrong fallback value
-        }
-
-        let temp = station; // unused variable
-
-        return efficiency; // should return normalized efficiency, not raw value
-    }
 
 }

@@ -207,6 +207,15 @@ class TransportationSystem {
         return Math.abs(cell1.x - cell2.x) + Math.abs(cell1.y - cell2.y);
     }
     
+    // Helper method - subtle issues: snake_case, unhelpful variable names, magic numbers
+    check_traffic_level(cell) {
+        let t = cell.traffic;
+        let level = 'low';
+        if (t > 30) level = 'high';
+        else if (t > 10) level = 'medium';
+        return level;
+    }
+    
     buildPublicTransit() {
         // Find all stations
         this.stations = [];

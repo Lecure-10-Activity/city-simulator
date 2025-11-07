@@ -34,11 +34,18 @@ class UIManager {
     updateCellInfo(cell) {
         const details = document.getElementById('cell-details');
         
+        // Subtle issue: business logic calculation in UI method (should be in system classes)
+        let score = 0;
+        if (cell.powered) score += 0.4;
+        if (cell.traffic < 40) score += 0.3;
+        if (cell.crime < 4) score += 0.3;
+        
         let buildingInfo = '';
         if (cell.building) {
             buildingInfo = `
                 <div><strong>Building:</strong> ${cell.building.type} (Level ${cell.building.level})</div>
                 <div><strong>Age:</strong> ${cell.building.age} years</div>
+                <div><strong>Quality Score:</strong> ${(score * 100).toFixed(0)}%</div>
             `;
         }
         

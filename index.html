@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="toolbar">
+            <div class="tool-group">
+                <h3>Zoning</h3>
+                <button id="zone-residential" class="tool-btn">Residential</button>
+                <button id="zone-commercial" class="tool-btn">Commercial</button>
+                <button id="zone-industrial" class="tool-btn">Industrial</button>
+            </div>
+            <div class="tool-group">
+                <h3>Infrastructure</h3>
+                <button id="build-road" class="tool-btn">Road</button>
+                <button id="build-power-line" class="tool-btn">Power Line</button>
+                <button id="build-power-plant" class="tool-btn">Power Plant</button>
+                <button id="build-police" class="tool-btn">Police Station</button>
+            </div>
+            <div class="tool-group">
+                <h3>Transit</h3>
+                <button id="build-train-track" class="tool-btn">Train Track</button>
+                <button id="build-station" class="tool-btn">Station</button>
+                <button id="build-subway" class="tool-btn">Subway</button>
+            </div>
+            <div class="tool-group">
+                <h3>View</h3>
+                <button id="view-traffic" class="view-btn">Traffic</button>
+                <button id="view-power" class="view-btn">Power</button>
+                <button id="view-crime" class="view-btn">Crime</button>
+                <button id="view-value" class="view-btn">Land Value</button>
+            </div>
+            <div class="tool-group">
+                <h3>Status</h3>
+                <div id="current-tool">Tool: None</div>
+                <div id="current-view">View: Normal</div>
+            </div>
+        </div>
+        
+        <div id="main-content">
+            <div id="city-grid"></div>
+            <div id="info-panel">
+                <div id="city-stats">
+                    <h3>City Statistics</h3>
+                    <div id="population">Population: 0</div>
+                    <div id="money">Money: $100,000</div>
+                    <div id="year">Year: 2024</div>
+                    <div id="tax-revenue">Tax Revenue: $0</div>
+                    <div id="expenses">Expenses: $0</div>
+                </div>
+                <div id="cell-info">
+                    <h3>Selected Cell</h3>
+                    <div id="cell-details">Click a cell to see details</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="controls">
+            <button id="simulate-year">Simulate Year</button>
+            <button id="pause-play">Pause/Play</button>
+            <div id="speed-control">
+                <label>Speed: </label>
+                <input type="range" id="speed-slider" min="1" max="10" value="5">
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/city.js"></script>
+    <script src="js/transportation.js"></script>
+    <script src="js/power.js"></script>
+    <script src="js/economy.js"></script>
+    <script src="js/crime.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

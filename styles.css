@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #2c3e50;
+    color: white;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#toolbar {
+    background: #34495e;
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.tool-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tool-group h3 {
+    font-size: 12px;
+    color: #bdc3c7;
+    margin-bottom: 5px;
+}
+
+#current-tool, #current-view {
+    font-size: 10px;
+    color: #ecf0f1;
+    background: #2c3e50;
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    border: 1px solid #34495e;
+}
+
+.tool-btn, .view-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.2s;
+}
+
+.tool-btn {
+    background: #3498db;
+    color: white;
+}
+
+.tool-btn:hover {
+    background: #2980b9;
+}
+
+.tool-btn.active {
+    background: #e74c3c;
+}
+
+.view-btn {
+    background: #27ae60;
+    color: white;
+}
+
+.view-btn:hover {
+    background: #229954;
+}
+
+.view-btn.active {
+    background: #f39c12;
+}
+
+#main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+#city-grid {
+    flex: 1;
+    background: #1a252f;
+    position: relative;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(50, 20px);
+    grid-template-rows: repeat(50, 20px);
+    gap: 1px;
+    padding: 10px;
+}
+
+.cell {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #34495e;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Different cursors based on tool selection */
+.tool-selected .cell {
+    cursor: crosshair;
+}
+
+.no-tool-selected .cell {
+    cursor: default;
+}
+
+.cell:hover {
+    border-color: #3498db;
+}
+
+.cell.selected {
+    border-color: #e74c3c;
+    border-width: 2px;
+}
+
+/* Cell types */
+.cell.empty { background: #2c3e50; }
+.cell.residential { background: #27ae60; }
+.cell.commercial { background: #3498db; }
+.cell.industrial { background: #f39c12; }
+.cell.road { background: #7f8c8d; }
+.cell.power-line { background: #e67e22; }
+.cell.power-plant { background: #e74c3c; }
+.cell.police { background: #9b59b6; }
+.cell.train-track { background: #34495e; }
+.cell.station { background: #1abc9c; }
+.cell.subway { background: #8e44ad; }
+
+/* Overlays */
+.cell.no-power { 
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(231, 76, 60, 0.3) 2px,
+        rgba(231, 76, 60, 0.3) 4px
+    );
+}
+
+.cell.high-traffic::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 0, 0.5);
+    pointer-events: none;
+}
+
+.cell.high-crime::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(231, 76, 60, 0.4);
+    pointer-events: none;
+}
+
+.cell.high-value::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(46, 204, 113, 0.4);
+    pointer-events: none;
+}
+
+#info-panel {
+    width: 300px;
+    background: #34495e;
+    padding: 15px;
+    border-left: 2px solid #2c3e50;
+    overflow-y: auto;
+}
+
+#city-stats, #cell-info {
+    margin-bottom: 20px;
+}
+
+#city-stats h3, #cell-info h3 {
+    color: #3498db;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+#city-stats div, #cell-details {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+#controls {
+    background: #34495e;
+    padding: 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    border-top: 2px solid #2c3e50;
+}
+
+#controls button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background: #27ae60;
+    color: white;
+    cursor: pointer;
+}
+
+#controls button:hover {
+    background: #229954;
+}
+
+#speed-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#speed-slider {
+    width: 100px;
+}
+
+/* Traffic visualization */
+.traffic-light { background: rgba(255, 255, 0, 0.3) !important; }
+.traffic-medium { background: rgba(255, 165, 0, 0.4) !important; }
+.traffic-heavy { background: rgba(255, 0, 0, 0.5) !important; }
+
+/* Power visualization */
+.powered { box-shadow: inset 0 0 5px rgba(46, 204, 113, 0.8); }
+.unpowered { box-shadow: inset 0 0 5px rgba(231, 76, 60, 0.8); }
+
+/* Crime visualization */
+.crime-low { background: rgba(46, 204, 113, 0.2) !important; }
+.crime-medium { background: rgba(255, 193, 7, 0.3) !important; }
+.crime-high { background: rgba(220, 53, 69, 0.4) !important; }
+
+/* Land value visualization */
+.value-low { background: rgba(108, 117, 125, 0.3) !important; }
+.value-medium { background: rgba(255, 193, 7, 0.3) !important; }
+.value-high { background: rgba(40, 167, 69, 0.4) !important; }
+.value-premium { background: rgba(0, 123, 255, 0.4) !important; }
